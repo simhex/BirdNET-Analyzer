@@ -395,6 +395,13 @@ def analyzer_parser():
         help="Maximum number of consecutive detections above MIN_CONF to merge for each detected species. This will result in fewer entires in the result file with segments longer than 3 seconds. Set to 0 or 1 to disable merging. Set to None to include all consecutive detections. We use the mean of the top 3 scores from all consecutive detections for merging.",
     )
 
+    parser.add_argument(
+        "--pad",
+        default="zero",
+        choices=["zero", "gaussian"],
+        help="Padding mode for short audio samples",
+    )
+
     return parser
 
 
@@ -749,6 +756,12 @@ def train_parser():
         type=int,
         default=cfg.AUTOTUNE_EXECUTIONS_PER_TRIAL,
         help="The number of times a training run with a set of hyperparameters is repeated during hyperparameter tuning (this reduces the variance).",
+    )
+    parser.add_argument(
+        "--pad",
+        default="zero",
+        choices=["zero", "gaussian"],
+        help="Padding mode for short audio samples",
     )
 
     return parser

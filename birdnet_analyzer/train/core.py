@@ -32,6 +32,7 @@ def train(
     autotune: bool = False,
     autotune_trials: int = 50,
     autotune_executions_per_trial: int = 1,
+    pad: Literal["zero", "gaussian"] = "zero",
 ):
     """
     Trains a custom classifier model using the BirdNET-Analyzer framework.
@@ -65,6 +66,7 @@ def train(
         autotune (bool, optional): Whether to use hyperparameter autotuning. Defaults to False.
         autotune_trials (int, optional): Number of trials for autotuning. Defaults to 50.
         autotune_executions_per_trial (int, optional): Number of executions per autotuning trial. Defaults to 1.
+        pad (Literal["zero", "gaussian"], optional): Padding mode for short audio samples. Defaults to "zero".
     Returns:
         None
     """
@@ -109,5 +111,8 @@ def train(
     cfg.AUTOTUNE_TRIALS = autotune_trials
     cfg.AUTOTUNE_EXECUTIONS_PER_TRIAL = autotune_executions_per_trial
 
+    cfg.USE_NOISE = True if pad == "gaussian" else False
+
     # Train model
     train_model()
+    

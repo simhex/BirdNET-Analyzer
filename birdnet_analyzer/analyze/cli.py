@@ -1,4 +1,4 @@
-from birdnet_analyzer import analyze
+from birdnet_analyzer.analyze.core import analyze # SH 18-Sep-2025: imports the analyze function explicitly, if not the analyze function and the analyze module will be confused and throw a "module object is not callable" error.
 from birdnet_analyzer.utils import runtime_error_handler
 
 
